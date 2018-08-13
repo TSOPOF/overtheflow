@@ -1,1 +1,9 @@
+com\overtheflow\bean\SampleBean.class
 com\overtheflow\controller\HomeController.class
+com\overtheflow\dao\SampleDAO.class
+com\overtheflow\vo\FeedVO.class
+com\overtheflow\util\SampleUtil.class
+com\overtheflow\vo\FeedTypeVO.class
+com\overtheflow\vo\FolderVO.class
+com\overtheflow\mapper\FolderMapper.class
+com\overtheflow\service\SampleService.class

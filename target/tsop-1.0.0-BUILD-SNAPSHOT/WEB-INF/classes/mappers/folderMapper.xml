@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.overtheflow.mapper.FolderMapper">
+
+	<resultMap type="FolderVO" id="result">
+		<id property="folderNo" column="folder_no"/>
+		<result property="superFolderNo" column="super_folder_no"/>
+		<result property="memberNo" column="memberNo"/>
+		<result property="folderName" column="folder_name"/>
+	</resultMap>
+
+	<insert id="addFolder" parameterType="FolderVO">
+		INSERT INTO folder_tb (folder_no, super_folder_no, member_no, folder_name)
+		VALUES (#{folderNo}, #{superFolderNo}, #{memberNo}, #{folderName})
+	</insert>
+	 
+	<update id="modifyFolder" parameterType="FolderVO">
+		UPDATE folder_tb
+		SET super_folder_no = #{superFolderNo}, folder_name = #{folderName}
+		WHERE folder_no = #{folderNo}
+	</update>
+	
+	<select id="getFolderByNo" parameterType="int" resultMap="result">
+		SELECT *
+		FROM folder_tb
+		WHERE folder_no = #{folderNo}
+	</select>
+	
+	<select id="getAll" resultMap="result">
+		SELECT *
+		FROM folder_tb ORDER BY (folder_no)
+	</select>
+	
+	<select id="getFolders" parameterType="map" resultMap="result">
+		SELECT *
+		FROM folder_tb
+		<where>
+			<if test="superFolderNo != null">
+				AND super_folder_no = #{superFolderNo}
+			</if>
+			<if test="memberNo != null">
+				AND member_id = #{memberId}
+			</if>
+			<if test="folderName != null">
+				AND folder_name LIKE "%${folderName}%"
+			</if>
+		</where>
+		<if test="orderColumn != null">
+			ORDER BY ${orderColumn}
+		</if>
+	</select>
+	
+	<select id="getMaxNo" resultType="int">
+		SELECT MAX(folder_no) FROM folder_tb
+	</select>
+	
+	<delete id="deleteFolder" parameterType="int">
+		DELETE FROM folder_tb
+		WHERE folder_no = #{folderNo}
+	</delete>
+</mapper>

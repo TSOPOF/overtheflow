@@ -4,6 +4,7 @@
 <configuration>
 	<!-- Aliasing -->
 	<typeAliases>
+		<typeAlias type="com.overtheflow.vo.FolderVO" alias="FolderVO"/>
 	</typeAliases>
 	 
 	<typeHandlers>

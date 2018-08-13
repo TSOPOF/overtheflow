@@ -4,14 +4,9 @@
 <configuration>
 	<!-- Aliasing -->
 	<typeAliases>
-		<typeAlias alias="MemberClassDTO" type="com.lecto.tsop.dto.MemberClassDTO"/>
-		<typeAlias alias="MemberDTO" type="com.lecto.tsop.dto.MemberDTO"/>
-		<typeAlias alias="FolderDTO" type="com.lecto.tsop.dto.FolderDTO"/>
-		<typeAlias alias="FileDTO" type="com.lecto.tsop.dto.FileDTO"/>
-		<typeAlias alias="BooleanCharTypeHandler" type="com.lecto.tsop.typehandler.BooleanCharTypeHandler"/>
+		<typeAlias type="com.overtheflow.vo.FolderVO" alias="FolderVO"/>
 	</typeAliases>
 	 
 	<typeHandlers>
-		<typeHandler handler="com.lecto.tsop.typehandler.BooleanCharTypeHandler" javaType="boolean" jdbcType="CHAR"/>
 	</typeHandlers>
 </configuration>
