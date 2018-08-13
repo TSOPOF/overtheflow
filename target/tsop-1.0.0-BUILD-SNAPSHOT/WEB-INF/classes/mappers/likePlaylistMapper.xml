@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.overtheflow.mapper.LikePlaylistMapper">
+	<resultMap type="com.overtheflow.vo.LikePlaylistVO" id="likePlaylist">
+
+	</resultMap>
+	
+	<sql id="columns">
+		bno, title, content, writer, regdate, viewcnt, filename, filesize, oldname
+	</sql>
+	
+	<insert id="create" parameterType="board">
+		INSERT INTO tbl_board2 (bno, title, content, writer, filename, filesize, oldname)
+		VALUES (board2_sq.nextval, #{title}, #{content}, #{writer}, #{filename}, #{filesize}, #{oldname})
+	</insert>
+	
+	<select id="read" parameterType="Integer" resultMap="board">
+		SELECT	<include refid="columns" />
+		FROM tbl_board2
+		WHERE bno=#{bno}
+	</select>
+	
+	<update id="update" parameterType="board">
+		UPDATE tbl_board2
+		SET title=#{title}, content=#{content}, writer=#{writer}, filename=#{filename}, filesize=#{filesize}, oldname=#{oldname}
+		WHERE bno = #{bno}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM tbl_board2
+		WHERE bno = #{bno}
+	</delete>
+	
+	<select id="listAll" resultMap="board">
+		SELECT
+			<include refid="columns" />
+		FROM 
+			tbl_board2
+		WHERE bno > 0
+		ORDER BY bno DESC, regdate DESC
+	</select>
+
+	<select  id="readList" parameterType="Integer" resultMap="board"> 
+		SELECT
+			<include refid="columns"/> 
+		FROM ( select /*+ FIRST_ROWS(10) */ 
+         a.<include refid="columns"/>, ROWNUM rnum 
+       	FROM
+         (SELECT <include refid="columns"/> FROM tbl_board2 order by bno DESC) a
+       	WHERE
+         ROWNUM &lt;= #{pageNum} * 10)
+		WHERE
+ 		 rnum  &gt;= (#{pageNum} -1) * 10 + 1
+	</select>
+
+	<select id="readIndex" parameterType="map" resultType="Integer">
+		SELECT 
+			COUNT(bno) 
+		FROM 
+			tbl_board2
+		<where>
+			<if test="title != null">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="content != null">
+				AND content LIKE '%${keyword}%'
+			</if>
+			<if test="writer != null">
+				AND writer LIKE '%${keyword}%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="searchByCondition" parameterType="map" resultMap="board">
+		SELECT
+			<include refid="columns"/> 
+		FROM ( select /*+ FIRST_ROWS(10) */ 
+         a.<include refid="columns"/>, ROWNUM rnum 
+       	FROM
+         (SELECT <include refid="columns"/> FROM tbl_board2 
+          <where>
+          	<if test="title != null">
+				AND title LIKE '%${keyword}%'
+			</if>
+			<if test="content != null">
+				AND content LIKE '%${keyword}%'
+			</if>
+			<if test="writer != null">
+				AND writer LIKE '%${keyword}%'
+			</if>
+          </where>
+         ORDER BY bno DESC) a
+       	WHERE
+         ROWNUM &lt;= #{pageNum} * 10)
+		WHERE
+ 		 rnum  &gt;= (#{pageNum} -1) * 10 + 1
+	</select>
+</mapper>

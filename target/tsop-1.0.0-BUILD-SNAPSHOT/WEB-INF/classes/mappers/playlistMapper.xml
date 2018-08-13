@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.overtheflow.mapper.PlaylistMapper">
+	<resultMap type="com.overtheflow.vo.playlistVO" id="playlist">
+		<id property="playlistNo" column="playlist_no" />
+		<id property="memberNo" column="member_no" />
+		<id property="playlistVisibility" column="playlist_visibility" />
+		<id property="playlistTitle" column="playlist_title" />
+		<id property="playlistIntro" column="playlist_intro" />
+		<id property="playlistRegDate" column="playlist_reg_date" />
+	</resultMap>
+
+	
+	<insert id="create" parameterType="playlist">
+		INSERT INTO playlist_tb
+		VALUES (#{playlistNo}, #{memberNo}, #{playlistVisibility}, #{playlistTitle}, #{playlistTitle}, 
+		#{playlistIntro}, #{playlistRegDate})
+	</insert>
+</mapper>

@@ -1,1 +1,8 @@
+com\overtheflow\vo\PlaylistViewVO.class
+com\overtheflow\vo\LikePlaylistVO.class
+com\overtheflow\mapper\PlaylistMapper.class
 com\overtheflow\controller\HomeController.class
+com\overtheflow\vo\TagPlaylistVO.class
+com\overtheflow\vo\TracklistVO.class
+com\overtheflow\vo\PlaylistRepostVO.class
+com\overtheflow\vo\PlaylistVO.class
