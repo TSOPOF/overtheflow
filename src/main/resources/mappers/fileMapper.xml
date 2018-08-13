@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.overtheflow.mapper.FileMapper">
+
+	<resultMap type="com.overtheflow.vo.FileVO" id="file">
+		<id property="fileNo" column="file_no"/>
+		<id property="folderNo" column="folder_no"/>
+		<id property="memberNo" column="member_no"/>
+		<id property="important" column="file_important"/>
+		<id property="fileSize" column="file_size"/>
+		<id property="name" column="file_name"/>
+		<id property="extension" column="extension"/>
+		<id property="uploadDate" column="upload_date"/>
+	</resultMap>
+	
+	<insert id="addFile" parameterType="file">
+		INSERT INTO file_tb VALUES(#(file_no), #(folder_no), #(member_no), #(important), #(file_size), #(file_name), #(extension), sysdate)	
+	</insert>
+	
+	<update id="modifyFile" parameterType="file">
+		UPDATE file_tb SET file_name = #(fileName) WHERE file_no = #(fileNo)	
+	</update>
+	
+	<delete id="deleteFile" parameterType="int">
+		DELETE FROM file_tb WHERE file_no = #(fileNo)
+	</delete>
+	
+	<select id="getFile" parameterType="int" resultType="file">
+		SELECT 
+	</select>
+	
+	
+
+	
+</mapper>
