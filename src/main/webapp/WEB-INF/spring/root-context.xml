@@ -28,7 +28,24 @@
 	
 	<!-- Mapper Beans -->
 	
+	<bean id="followMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.overtheflow.dao.FollowMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>	
+	<bean id="memberClassMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.overtheflow.dao.MemberClassMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<bean id="memberMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.overtheflow.dao.MemberMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<bean id="memberViewMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.overtheflow.dao.MemberViewMapper"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
 	<!-- scan property -->
-	<context:component-scan base-package="com.overtheflow.persistence"></context:component-scan>
+	<context:component-scan base-package="com.overtheflow.dao"></context:component-scan>
 	
 </beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.overtheflow.dao.FollowMapper">
+
+	<insert id="addFollow" parameterType="map">
+		insert into follow_tb (follow_no, follower_no) values
+										(#{followNo}, #{followerNo})
+	</insert>
+	<delete id="deleteFollow" parameterType="map">
+		delete from follow_tb where follow_no=#{followNo} and
+									follower_no=#{followerNo}
+	</delete>
+	<select id="getFollow" parameterType="map" resultType="Integer">
+		select count(follow_no) from follow_tb
+				where follow_no=#{followNo} and follower_no=#{followerNo}
+	</select>
+	<select id="getfollows" parameterType="map" resultType="Integer">
+		select ${columnName} from follow_tb
+			<where>
+				<if test="followNo!=null">
+					follow_no=#{followNo}
+				</if>
+				<if test="followerNo!=null">
+					and follower_no=#{followerNo}
+				</if>
+				<if test="orderColumn!=null">
+					order by ${orderColumn}
+				</if>
+			</where>
+	</select>
+</mapper>	

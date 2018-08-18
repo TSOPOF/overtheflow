@@ -1,1 +1,7 @@
+com\overtheflow\vo\MemberViewVO.class
+com\overtheflow\dao\MemberMapper.class
 com\overtheflow\controller\HomeController.class
+com\overtheflow\dao\MemberViewMapper.class
+com\overtheflow\dao\MemberClassMapper.class
+com\overtheflow\vo\MemberClassVO.class
+com\overtheflow\dao\FollowMapper.class
